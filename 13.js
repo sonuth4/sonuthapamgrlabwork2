@@ -1,5 +1,5 @@
 function joinArrayElements() {
-    let arr = ["This", "is", "a", "test"];
-    console.log(arr.join(" ")); // Joins with a space
+    let arr = ["B", "C", "A"];
+    console.log(arr.join(" ")); 
 }
 joinArrayElements();

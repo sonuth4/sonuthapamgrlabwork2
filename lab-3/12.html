@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 50px;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movies List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Poster</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th>Rating</th>
+                <th>Director</th>
+                <th>Country</th>
+                <th>Language</th>
+                <th>Actors</th>
+            </tr>
+        </thead>
+        <tbody id="movieTableBody">
+            <!-- Content will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Mock movie data
+        const mockMovies = [
+            {
+                id: 1,
+                title: "Inception",
+                poster: "https://via.placeholder.com/50",
+                year: 2010,
+                genre: "Sci-Fi",
+                rating: 8.8,
+                director: "Christopher Nolan",
+                country: "USA",
+                language: "English",
+                actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"]
+            },
+            {
+                id: 2,
+                title: "The Dark Knight",
+                poster: "https://via.placeholder.com/50",
+                year: 2008,
+                genre: "Action",
+                rating: 9.0,
+                director: "Christopher Nolan",
+                country: "USA",
+                language: "English",
+                actors: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"]
+            },
+            {
+                id: 3,
+                title: "Parasite",
+                poster: "https://via.placeholder.com/50",
+                year: 2019,
+                genre: "Thriller",
+                rating: 8.6,
+                director: "Bong Joon-ho",
+                country: "South Korea",
+                language: "Korean",
+                actors: ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong"]
+            },
+        ];
+
+       
+        function loadMovies() {
+            const tbody = document.getElementById('movieTableBody');
+            tbody.innerHTML = ''; 
+
+            mockMovies.forEach(movie => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${movie.id}</td>
+                    <td>${movie.title}</td>
+                    <td><img src="${movie.poster}" alt="Poster for ${movie.title}" /></td>
+                    <td>${movie.year}</td>
+                    <td>${movie.genre}</td>
+                    <td>${movie.rating}</td>
+                    <td>${movie.director}</td>
+                    <td>${movie.country}</td>
+                    <td>${movie.language}</td>
+                    <td>${movie.actors.join(', ')}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        
+        window.onload = loadMovies;
+    </script>
+</body>
+</html>

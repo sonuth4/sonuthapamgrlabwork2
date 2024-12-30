@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <div class="error" id="nameError"></div>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+        <div class="error" id="addressError"></div>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <div class="error" id="usernameError"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <div class="error" id="emailError"></div>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <div class="error" id="passwordError"></div>
+
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website">
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone">
+        <div class="error" id="phoneError"></div>
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <div class="error" id="genderError"></div>
+
+        <label for="course">Course:</label>
+        <select id="course" name="course">
+            <option value="">--Select--</option>
+            <option value="course1">BCA</option>
+            <option value="course2">BBM</option>
+            <option value="course3">BIT</option>
+        </select>
+        <div class="error" id="courseError"></div>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $("#registrationForm").submit(function (event) {
+                event.preventDefault();
+                let valid = true;
+
+                
+                const name = $("#name").val();
+                if (!name || /\d/.test(name)) {
+                    $("#nameError").text("Name cannot be empty or contain numbers.");
+                    valid = false;
+                } else {
+                    $("#nameError").text("");
+                }
+
+                
+                const address = $("#address").val();
+                if (!address) {
+                    $("#addressError").text("Address cannot be empty.");
+                    valid = false;
+                } else {
+                    $("#addressError").text("");
+                }
+
+                
+                const username = $("#username").val();
+                if (!username || /\s|[^a-zA-Z0-9_]/.test(username)) {
+                    $("#usernameError").text("Username cannot be empty, contain spaces, or special characters except underscore.");
+                    valid = false;
+                } else {
+                    $("#usernameError").text("");
+                }
+
+                
+                const email = $("#email").val();
+                if (!email || !/@/.test(email)) {
+                    $("#emailError").text("Email cannot be empty and must include '@'.");
+                    valid = false;
+                } else {
+                    $("#emailError").text("");
+                }
+
+                
+                const password = $("#password").val();
+                if (!password || !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(password)) {
+                    $("#passwordError").text("Password must be at least 8 characters long, include one uppercase, one lowercase, one digit, and one special character.");
+                    valid = false;
+                } else {
+                    $("#passwordError").text("");
+                }
+
+                
+                const phone = $("#phone").val();
+                if (!phone || !/^(98|97|96)\d{8}$/.test(phone)) {
+                    $("#phoneError").text("Phone must start with 98, 97, or 96 and contain only 10 digits.");
+                    valid = false;
+                } else {
+                    $("#phoneError").text("");
+                }
+
+                
+                if (!$("input[name='gender']:checked").val()) {
+                    $("#genderError").text("Please select your gender.");
+                    valid = false;
+                } else {
+                    $("#genderError").text("");
+                }
+
+                
+                const course = $("#course").val();
+                if (!course) {
+                    $("#courseError").text("Please select a course.");
+                    valid = false;
+                } else {
+                    $("#courseError").text("");
+                }
+
+                if (valid) {
+                    alert("Form submitted successfully!");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #loginForm {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        #loginForm h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #errorMessage {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #welcomeMessage {
+            text-align: center;
+            font-size: 1.2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginForm">
+        <h2>Login</h2>
+        <div id="errorMessage"></div>
+        <form id="userLoginForm">
+            <label for="userid">User ID:</label>
+            <input type="text" id="userid" name="userid" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="welcomeMessage" style="display: none;">Welcome!</div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#userLoginForm').submit(function (e) {
+                e.preventDefault(); 
+                const userid = $('#userid').val();
+                const password = $('#password').val();
+
+                $.ajax({
+                    url: 'backend.php', 
+                    type: 'POST',
+                    data: {
+                        userid: userid,
+                        password: password
+                    },
+                    success: function (response) {
+                        if (response.trim() === 'success') {
+                            $('#userLoginForm').hide();
+                            $('#welcomeMessage').show();
+                        } else {
+                            $('#errorMessage').text('Invalid credentials, please try again.');
+                        }
+                    },
+                    error: function () {
+                        $('#errorMessage').text('An error occurred. Please try again later.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

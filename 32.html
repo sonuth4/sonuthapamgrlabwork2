@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #counter {
+            font-size: 24px;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:nth-of-type(1), button:nth-of-type(2) {
+            background-color: #4caf50;
+            color: white;
+        }
+        button:nth-of-type(3) {
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Counter App</h1>
+    <button onclick="increment()">+</button>
+    <span id="counter">0</span>
+    <button onclick="decrement()">-</button>
+    <br><br>
+    <button onclick="reset()">Reset</button>
+
+    <script>
+        let count = 0;
+
+function increment() {
+    count++;
+    document.getElementById("counter").textContent = count;
+}
+
+function decrement() {
+    count--;
+    document.getElementById("counter").textContent = count;
+}
+
+function reset() {
+    count = 0;
+    document.getElementById("counter").textContent = count;
+}
+    </script>
+</body>
+</html>

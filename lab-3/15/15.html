@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Description</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #content {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: blueviolet;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <h1>BCA Description</h1>
+    <p>Click the button below to load the description of the BCA program.</p>
+    <button onclick="loadContent()">Load BCA Description</button>
+    <div id="content">
+        <p><strong>Content will appear here...</strong></p>
+    </div>
+
+    <script>
+        function loadContent() {
+            
+            const xhr = new XMLHttpRequest();
+
+            
+            xhr.open("GET", "bca.txt", true);
+
+            
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    
+                    document.getElementById("content").innerHTML = xhr.responseText;
+                } else {
+                    
+                    document.getElementById("content").innerHTML = "Error loading content.";
+                }
+            };
+
+            
+            xhr.onerror = function () {
+                document.getElementById("content").innerHTML = "An error occurred during the request.";
+            };
+
+            
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

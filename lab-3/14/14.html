@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country and City Dropdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select {
+            padding: 10px;
+            margin: 10px 0;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Country and City</h1>
+
+    <label for="country">Country:</label>
+    <select id="country" onchange="fetchCities()">
+        <option value="">Select a country</option>
+        <option value="1">USA</option>
+        <option value="2">China</option>
+        <option value="3">Italy</option>
+    </select>
+
+    <br>
+
+    <label for="city">City:</label>
+    <select id="city">
+        <option value="">Select a city</option>
+    </select>
+
+    <script>
+        function fetchCities() {
+            const countryId = document.getElementById('country').value;
+            const cityDropdown = document.getElementById('city');
+            cityDropdown.innerHTML = '<option value="">Select a city</option>';
+
+            if (countryId === '') {
+                return; 
+            }
+
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '14.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const cities = JSON.parse(this.responseText);
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city.id;
+                        option.textContent = city.name;
+                        cityDropdown.appendChild(option);
+                    });
+                }
+            };
+
+            xhr.send('country_id=' + encodeURIComponent(countryId));
+        }
+    </script>
+</body>
+</html>
